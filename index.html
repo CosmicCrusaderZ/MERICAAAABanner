@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MERICA! Banner</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #3c3b6e;
+            overflow: hidden;
+        }
+
+        .banner {
+            width: 800px;
+            height: 250px;
+            background: linear-gradient(45deg, #b22234 25%, #ffffff 25%, #ffffff 50%, #b22234 50%, #b22234 75%, #ffffff 75%);
+            background-size: 40px 40px;
+            border: 8px solid #ffffff;
+            box-shadow: 0 0 20px #ffffff, inset 0 0 20px #ffffff;
+            position: relative;
+            overflow: hidden;
+            animation: stripes 10s linear infinite;
+        }
+
+        @keyframes stripes {
+            0% { background-position: 0 0; }
+            100% { background-position: 80px 0; }
+        }
+
+        .title {
+            font-family: 'Bangers', cursive;
+            font-size: 72px;
+            color: #3c3b6e;
+            text-align: center;
+            padding-top: 20px;
+            text-shadow: 3px 3px #ffffff, -3px -3px #b22234;
+            position: relative;
+            z-index: 2;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .eagle {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 120px;
+            animation: fly 3s ease-in-out infinite;
+        }
+
+        @keyframes fly {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            50% { transform: translateX(-50%) rotate(10deg) translateY(-20px); }
+        }
+
+        .star {
+            position: absolute;
+            color: #ffffff;
+            font-size: 24px;
+            animation: twinkle 1.5s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: explode 1s ease-out infinite;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(20); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <h1 class="title">MERICA!</h1>
+        <div class="eagle">🦅</div>
+    </div>
+
+    <script>
+        function createStars() {
+            const banner = document.querySelector('.banner');
+            for (let i = 0; i < 20; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.textContent = '★';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 2}s`;
+                banner.appendChild(star);
+            }
+        }
+
+        function createFireworks() {
+            const banner = document.querySelector('.banner');
+            setInterval(() => {
+                const firework = document.createElement('div');
+                firework.classList.add('firework');
+                firework.style.left = `${Math.random() * 100}%`;
+                firework.style.top = `${Math.random() * 100}%`;
+                firework.style.backgroundColor = Math.random() > 0.5 ? '#b22234' : '#ffffff';
+                banner.appendChild(firework);
+                setTimeout(() => firework.remove(), 1000);
+            }, 300);
+        }
+
+        createStars();
+        createFireworks();
+    </script>
+</body>
+</html>
